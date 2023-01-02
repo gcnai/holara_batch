@@ -16,7 +16,7 @@ Networkタブを開いた状態で生成した画像をローカルに吐き出�
 - 動いた: vivaldi
 - 多分動く: Chrome
 - 動かない: Firefox
-  - jsonのテキストの最大長が10Mしかない
+  - jsonのテキストの最大長が1Mしかない
 
 ## Usage
 

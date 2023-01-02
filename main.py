@@ -42,3 +42,4 @@ if __name__ == '__main__':
                     info.add_text('parameters', metaStr)
                     with io.open(name, "wb") as f:
                         pim.save(f, pnginfo=info)
+                i += 1

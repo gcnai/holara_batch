@@ -35,7 +35,7 @@ if __name__ == '__main__':
                       % (params['prompt'], params['negative_prompt'], params['steps'], params['cfg_scale'], params['seed'], params['width'], params['height'])
             i = 0
             for im in content['images']:
-                name = "%s_%02d.png" % (dt.strftime("%Y%d%H%M%S"), i)
+                name = "%s_%02d.png" % (dt.strftime("%Y%m%d%H%M%S"), i)
                 data = base64.b64decode(im)
                 with PIL.Image.open(io.BytesIO(data)) as pim:
                     info = PIL.PngImagePlugin.PngInfo()

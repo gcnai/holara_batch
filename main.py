@@ -25,6 +25,8 @@ if __name__ == '__main__':
                 and e['response']['status'] == 200
 
         for entry in filter(entry_filter, j["log"]["entries"]):
+            if 'text' not in entry['response']['content']:
+                continue
             content = json.loads(entry['response']['content']['text'])
             if content['status'] != 'success':
                 continue

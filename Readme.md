@@ -18,6 +18,12 @@ Networkタブを開いた状態で生成した画像をローカルに吐き出�
 - 動かない: Firefox
   - jsonのテキストの最大長が1Mしかない
 
+## Installation
+
+```shell
+pip install -r requirements.txt
+```
+
 ## Usage
 
 ```shell

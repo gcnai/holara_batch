@@ -16,13 +16,14 @@ def array_to_dict2(a):
     return dict(zip(map(lambda i: i['name'], a), map(lambda i: urllib.parse.unquote_plus(i['value']), a)))
 
 
+def entry_filter(e):
+    return e['request']['url'] == 'https://holara.ai/holara/api/1.0/generate_image' \
+        and e['response']['status'] == 200
+
+
 if __name__ == '__main__':
     with io.open(sys.argv[1], "rb") as fp:
         j = json.load(fp)
-
-        def entry_filter(e):
-            return e['request']['url'] == 'https://holara.ai/holara/api/1.0/generate_image'\
-                and e['response']['status'] == 200
 
         for entry in filter(entry_filter, j["log"]["entries"]):
             if 'text' not in entry['response']['content']:
@@ -33,8 +34,9 @@ if __name__ == '__main__':
             headers = array_to_dict(entry['response']['headers'])
             dt = datetime.strptime(headers['date'], '%a, %d %b %Y %H:%M:%S %Z')
             params = array_to_dict2(entry['request']['postData']['params'])
-            metaStr = "%s\nNegative prompt: %s\nSteps: %s, Sampler: , CFG scale: %s, Seed: %s, Size: %sx%s" \
-                      % (params['prompt'], params['negative_prompt'], params['steps'], params['cfg_scale'], params['seed'], params['width'], params['height'])
+            metaStr = "%s\nNegative prompt: %s\nSteps: %s, Sampler: , CFG scale: %s, Seed: %s, Size: %sx%s" % (
+                params['prompt'], params['negative_prompt'], params['steps'], params['cfg_scale'],
+                params['seed'], params['width'], params['height'])
             i = 0
             for im in content['images']:
                 name = "%s_%02d.png" % (dt.strftime("%Y%m%d%H%M%S"), i)
